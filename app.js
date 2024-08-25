@@ -28,6 +28,14 @@ let keys = {
     ArrowLeft: false,
     ArrowRight: false,
 };
+function triggerVibration() {
+    if (navigator.vibrate) {
+        // Vibrar por 200 milisegundos
+        navigator.vibrate(200);
+    } else {
+        console.log('Vibration API not supported.');
+    }
+}
 
 function keyDown(e) {
     e.preventDefault();
@@ -84,13 +92,16 @@ function isCollide(car, enemyCar) {
     carRect = car.getBoundingClientRect();
     enemyCarRect = enemyCar.getBoundingClientRect();
 
-    return !(
-        carRect.top > enemyCarRect.bottom ||
-        carRect.left > enemyCarRect.right ||
-        carRect.right < enemyCarRect.left ||
-        carRect.bottom < enemyCarRect.top
-    );
+    if (!(carRect.top > enemyCarRect.bottom ||
+          carRect.left > enemyCarRect.right ||
+          carRect.right < enemyCarRect.left ||
+          carRect.bottom < enemyCarRect.top)) {
+        triggerVibration();  // Llamar a la vibración aquí
+        return true;
+    }
+    return false;
 }
+
 
 function moveEnemyCar(car) {
     let enemyCars = document.querySelectorAll(".enemyCar");
