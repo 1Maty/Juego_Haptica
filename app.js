@@ -31,7 +31,7 @@ let keys = {
 function triggerVibration() {
     if (navigator.vibrate) {
         // Vibrar por 200 milisegundos
-        navigator.vibrate(200);
+        window.navigator.vibrate(200);
     } else {
         console.log('Vibration API not supported.');
     }
