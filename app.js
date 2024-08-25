@@ -4,6 +4,32 @@ const gameArea = document.querySelector(".gameArea");
 
 document.addEventListener("keydown", keyDown);
 document.addEventListener("keyup", keyUp);
+window.addEventListener('deviceorientation', (event) => {
+    const { beta, gamma } = event;
+
+    if (gamma > 5) { // Inclinación hacia la derecha
+        keys.ArrowRight = true;
+        keys.ArrowLeft = false;
+    } else if (gamma < -5) { // Inclinación hacia la izquierda
+        keys.ArrowLeft = true;
+        keys.ArrowRight = false;
+    } else {
+        keys.ArrowLeft = false;
+        keys.ArrowRight = false;
+    }
+
+    if (beta < 90 && beta > 60) { // Inclinación hacia adelante
+        keys.ArrowUp = true;
+        keys.ArrowDown = false;
+    } else if (beta > 90 && beta < 120) { // Inclinación hacia atrás
+        keys.ArrowDown = true;
+        keys.ArrowUp = false;
+    } else {
+        keys.ArrowUp = false;
+        keys.ArrowDown = false;
+    }
+});
+
 
 let player = {
     speed: 5,
