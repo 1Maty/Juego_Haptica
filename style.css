@@ -4,6 +4,20 @@
     box-sizing: border-box;
     font-family: 'Josefin Sans', sans-serif;
 }
+@media (max-width: 600px) {
+    .gameArea {
+        width: 90vw; /* Más ancho para dispositivos más pequeños */
+        height: calc(100vh - 120px); /* Ajusta la altura para los controles */
+    }
+    .controls {
+        width: 80vw; /* Más ancho para facilitar el acceso en dispositivos pequeños */
+        bottom: 10px; /* Menos espacio desde el fondo */
+        .controls button {
+            width: 15vw; /* Botones más grandes */
+            height: 15vw; /* Mantén la proporción */
+        }
+    }
+}
 
 .carGame {
     width: 100vw;
@@ -19,8 +33,10 @@
     transform: translateX(-50%);
     display: flex;
     justify-content: space-between;
-    width: 200px; 
+    width: 200px;
+    z-index: 10; /* Asegura que esté por encima de otros elementos */
 }
+
 
 .controls button {
     width: 60px;
@@ -89,7 +105,7 @@
 
 .gameArea {
     width: 400px;
-    height: 100vh;
+    height: calc(100vh - 100px); /* Reduce la altura para dar espacio a los controles */
     margin: auto;
     background-color: #2d3436;
     position: relative;
@@ -97,6 +113,7 @@
     border-right: 7px dashed #c8d6e5;
     border-left: 7px dashed #c8d6e5;
 }
+
 
 .line {
     width: 12px;
