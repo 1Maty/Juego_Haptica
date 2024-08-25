@@ -12,6 +12,26 @@
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
+.controls {
+    position: fixed;
+    bottom: 20px; /* Ajusta la distancia al fondo según necesidades */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    width: 200px; /* Puedes ajustar el ancho según el tamaño de los botones */
+}
+
+.controls button {
+    width: 60px; /* Ancho de los botones */
+    height: 60px; /* Altura de los botones */
+    font-size: 24px; /* Tamaño del ícono o texto dentro del botón */
+    background-color: #007BFF; /* Color de fondo de los botones */
+    color: white; /* Color del texto */
+    border: none;
+    border-radius: 30px; /* Redondea los bordes para mejor estética */
+    outline: none; /* Elimina el borde al enfocar */
+}
 
 .startScreen {
     width: 50vw;
