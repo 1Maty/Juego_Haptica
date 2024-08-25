@@ -4,16 +4,21 @@ const gameArea = document.querySelector(".gameArea");
 
 document.addEventListener("keydown", keyDown);
 document.addEventListener("keyup", keyUp);
+document.addEventListener("DOMContentLoaded", () => {
+    const leftButton = document.getElementById('left');
+    const rightButton = document.getElementById('right');
+
+    leftButton.addEventListener('touchstart', () => keys.ArrowLeft = true);
+    leftButton.addEventListener('touchend', () => keys.ArrowLeft = false);
+
+    rightButton.addEventListener('touchstart', () => keys.ArrowRight = true);
+    rightButton.addEventListener('touchend', () => keys.ArrowRight = false);
+});
 
 
 let player = {
     speed: 5,
 };
-document.getElementById('left').addEventListener('touchstart', () => keys.ArrowLeft = true, {passive: true});
-document.getElementById('left').addEventListener('touchend', () => keys.ArrowLeft = false, {passive: true});
-
-document.getElementById('right').addEventListener('touchstart', () => keys.ArrowRight = true, {passive: true});
-document.getElementById('right').addEventListener('touchend', () => keys.ArrowRight = false, {passive: true});
 
 startScreen.addEventListener("click", startGame);
 
