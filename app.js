@@ -2,8 +2,26 @@ const score = document.querySelector(".score");
 const startScreen = document.querySelector(".startScreen");
 const gameArea = document.querySelector(".gameArea");
 
-document.addEventListener("keydown", keyDown);
-document.addEventListener("keyup", keyUp);
+document.getElementById('left').addEventListener('touchstart', (e) => {
+    e.preventDefault();  // Previene la selección de texto y otros comportamientos por defecto
+    keys.ArrowLeft = true;
+}, { passive: false });
+
+document.getElementById('left').addEventListener('touchend', (e) => {
+    e.preventDefault();
+    keys.ArrowLeft = false;
+}, { passive: false });
+
+document.getElementById('right').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    keys.ArrowRight = true;
+}, { passive: false });
+
+document.getElementById('right').addEventListener('touchend', (e) => {
+    e.preventDefault();
+    keys.ArrowRight = false;
+}, { passive: false });
+
 document.addEventListener("DOMContentLoaded", () => {
     const leftButton = document.getElementById('left');
     const rightButton = document.getElementById('right');
