@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+<audio id="gameMusic" loop>
+    <source src="only the best part of free bird.mp3" type="audio/mpeg">
+    Tu navegador no soporta el elemento audio.
+</audio>
+<script>
+    document.getElementById('gameMusic').volume = 0.01; // Establece el volumen a 1/3
+</script>
+<button onclick="toggleMusic()">Silenciar/Música</button>
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />

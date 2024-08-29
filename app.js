@@ -22,6 +22,22 @@ document.getElementById('right').addEventListener('touchend', (e) => {
     keys.ArrowRight = false;
 }, { passive: false });
 
+document.addEventListener("DOMContentLoaded", function() {
+    const gameMusic = document.getElementById('gameMusic');
+    const startScreen = document.querySelector(".startScreen");
+    const endScreen = document.querySelector(".endScreen"); // Asume que tienes un fin de juego
+
+    startScreen.addEventListener("click", function() {
+        gameMusic.play();
+    });
+
+    // Suponiendo que tienes una manera de detectar el fin del juego
+    //endScreen.addEventListener("click", function() {
+      //  gameMusic.pause();
+       // gameMusic.currentTime = 0; // Reinicia la canción al principio
+    //});
+});
+
 document.addEventListener("DOMContentLoaded", () => {
     const leftButton = document.getElementById('left');
     const rightButton = document.getElementById('right');
@@ -46,10 +62,16 @@ let keys = {
     ArrowLeft: false,
     ArrowRight: false,
 };
-function triggerVibration() {
+
+function triggerVibration(type) {
     if (navigator.vibrate) {
-        // Vibrar por 200 milisegundos
-        window.navigator.vibrate(200);
+        if (type === 'collision') {
+            // Vibración breve y seca para colisiones
+            window.navigator.vibrate([100]);
+        } else if (type === 'limit') {
+            // Vibración más continua para límites de la pista
+            window.navigator.vibrate([200, 100, 200, 100, 200]);
+        }
     } else {
         console.log('Vibration API not supported.');
     }
@@ -74,18 +96,16 @@ function gamePlay() {
 
         if (keys.ArrowLeft && player.x > 0) {
             player.x -= player.speed;
-            // Comprueba si está en el límite izquierdo
-            if (player.x <= 0) {
-                player.x = 0;
-                triggerVibration(); // Llamar a la vibración aquí
+            if (player.x < 0) { // Asegurarse de no ir más allá del borde izquierdo
+                player.x = -5;
+                triggerVibration('limit'); // Vibración continua si toca el borde
             }
         }
-        if (keys.ArrowRight && player.x < road.width - car.offsetWidth) {
+        if (keys.ArrowRight) {
             player.x += player.speed;
-            // Comprueba si está en el límite derecho
-            if (player.x >= road.width - car.offsetWidth) {
-                player.x = road.width - car.offsetWidth;
-                triggerVibration(); // Llamar a la vibración aquí
+            if (player.x > road.width - car.offsetWidth) {
+                player.x = road.width - car.offsetWidth-3;
+                triggerVibration('limit'); // Vibración continua si toca el borde
             }
         }
 
@@ -116,12 +136,11 @@ function isCollide(car, enemyCar) {
           carRect.left > enemyCarRect.right ||
           carRect.right < enemyCarRect.left ||
           carRect.bottom < enemyCarRect.top)) {
-        triggerVibration();  // Llamar a la vibración aquí
+        triggerVibration('collision');  // Vibración breve en colisiones
         return true;
     }
     return false;
 }
-
 
 function moveEnemyCar(car) {
     let enemyCars = document.querySelectorAll(".enemyCar");
@@ -138,6 +157,8 @@ function moveEnemyCar(car) {
         enemyCar.style.top = enemyCar.y + "px";
     });
 }
+
+const gameMusic = document.getElementById('gameMusic');
 
 function startGame() {
     score.classList.remove("hide");
@@ -158,7 +179,6 @@ function startGame() {
 
     let car = document.createElement("div");
     car.setAttribute("class", "car");
-
     gameArea.appendChild(car);
 
     player.x = car.offsetLeft;
@@ -173,9 +193,16 @@ function startGame() {
         enemyCar.style.left = Math.floor(Math.random() * 350) + "px";
         gameArea.appendChild(enemyCar);
     }
+
+    // Start or restart the music when the game starts
+    gameMusic.play();
 }
 
 function endGame() {
     player.start = false;
     startScreen.classList.remove("hide");
+
+    // Pause and reset the music when the game ends
+    gameMusic.pause();
+    gameMusic.currentTime = 0;
 }
