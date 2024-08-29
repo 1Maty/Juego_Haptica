@@ -81,7 +81,7 @@ function triggerVibration(type) {
             window.navigator.vibrate([300]);
         } else if (type === 'limit') {
             // Vibración continua que va disminuyendo en intensidad para límites de la pista
-            window.navigator.vibrate([300, 50, 200, 50, 100]); // Disminuye gradualmente
+            window.navigator.vibrate([222, 50, 111, 50, 70]); // Disminuye gradualmente
         }
     } else {
         console.log('Vibration API not supported.');
