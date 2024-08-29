@@ -54,29 +54,31 @@ function gamePlay() {
         moveLines();
         moveEnemyCar(car);
 
-        if (keys.ArrowUp && player.y > road.top + 150) {
-            player.y -= player.speed;
-        }
-        if (keys.ArrowDown && player.y < road.bottom - 80) {
-            player.y += player.speed;
-        }
         if (keys.ArrowLeft && player.x > 0) {
             player.x -= player.speed;
+            // Comprueba si está en el límite izquierdo
+            if (player.x <= 0) {
+                player.x = 0;
+                triggerVibration(); // Llamar a la vibración aquí
+            }
         }
-        if (keys.ArrowRight && player.x < road.width - 70) {
+        if (keys.ArrowRight && player.x < road.width - car.offsetWidth) {
             player.x += player.speed;
+            // Comprueba si está en el límite derecho
+            if (player.x >= road.width - car.offsetWidth) {
+                player.x = road.width - car.offsetWidth;
+                triggerVibration(); // Llamar a la vibración aquí
+            }
         }
 
-        car.style.top = `${player.y}px`;
         car.style.left = `${player.x}px`;
-
         window.requestAnimationFrame(gamePlay);
 
         player.score++;
-
         score.innerHTML = "Score: " + player.score;
     }
 }
+
 function moveLines() {
     let lines = document.querySelectorAll(".line");
     lines.forEach((line, index) => {
