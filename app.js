@@ -37,7 +37,18 @@ document.addEventListener("DOMContentLoaded", function() {
        // gameMusic.currentTime = 0; // Reinicia la canción al principio
     //});
 });
+let isMusicPlaying = true; // Variable para rastrear el estado de la música
 
+function toggleMusic() {
+    if (isMusicPlaying) {
+        gameMusic.pause();
+        document.querySelector('button[onclick="toggleMusic()"]').innerText = "Reactivar Música"; // Cambia el texto del botón
+    } else {
+        gameMusic.play();
+        document.querySelector('button[onclick="toggleMusic()"]').innerText = "Silenciar Música";
+    }
+    isMusicPlaying = !isMusicPlaying; // Alterna el estado
+}
 document.addEventListener("DOMContentLoaded", () => {
     const leftButton = document.getElementById('left');
     const rightButton = document.getElementById('right');
@@ -66,11 +77,11 @@ let keys = {
 function triggerVibration(type) {
     if (navigator.vibrate) {
         if (type === 'collision') {
-            // Vibración breve y seca para colisiones
-            window.navigator.vibrate([100]);
+            // Vibración fuerte para colisiones
+            window.navigator.vibrate([100,10,200,10,300,10,400]);
         } else if (type === 'limit') {
-            // Vibración más continua para límites de la pista
-            window.navigator.vibrate([200, 100, 200, 100, 200]);
+            // Vibración más continua pero tenue para límites de la pista
+            window.navigator.vibrate([50,20,30,10,10]);
         }
     } else {
         console.log('Vibration API not supported.');
