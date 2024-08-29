@@ -4,20 +4,6 @@
     box-sizing: border-box;
     font-family: 'Josefin Sans', sans-serif;
 }
-@media (max-width: 600px) {
-    .gameArea {
-        width: 90vw; /* Más ancho para dispositivos más pequeños */
-        height: calc(100vh - 120px); /* Ajusta la altura para los controles */
-    }
-    .controls {
-        width: 80vw; /* Más ancho para facilitar el acceso en dispositivos pequeños */
-        bottom: 10px; /* Menos espacio desde el fondo */
-        .controls button {
-            width: 15vw; /* Botones más grandes */
-            height: 15vw; /* Mantén la proporción */
-        }
-    }
-}
 
 .carGame {
     width: 100vw;
@@ -26,6 +12,17 @@
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
+
+.gameArea {
+    width: 100%; /* O un porcentaje del viewport que se adapte mejor */
+    max-width: 400px; /* Ajusta según la máxima anchura deseada */
+    height: 80vh; /* Ajusta según la altura deseada, dejando espacio para controles */
+    position: relative;
+    margin: 0 auto; /* Centra el área de juego horizontalmente */
+    background-color: #2d3436;
+    overflow: hidden;
+}
+
 .controls {
     position: fixed;
     bottom: 5vh; /* Asegura un espacio visible debajo */
@@ -37,13 +34,18 @@
     z-index: 10; /* Asegura que esté por encima de otros elementos */
 }
 
-
-
 .controls button {
     flex: 1; /* Los botones ocupan todo el espacio disponible */
     min-width: 50px;
     height: 10vh; /* Dependiendo del espacio vertical disponible */
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 24px;
+    outline: none;
 }
+
 .startScreen {
     width: 50vw;
     position: absolute;
@@ -85,8 +87,7 @@
     display: none;
 }
 
-.car,
-.enemyCar {
+.car, .enemyCar {
     width: 40px;
     height: 70px;
     background-image: url("./images/car4.png");
@@ -98,17 +99,6 @@
     bottom: 120px;
 }
 
-.gameArea {
-    width: 100%; /* O un porcentaje del viewport que se adapte mejor */
-    max-width: 400px; /* Ajusta según la máxima anchura deseada */
-    height: 80vh; /* Ajusta según la altura deseada, dejando espacio para controles */
-    position: relative;
-    margin: 0 auto; /* Centra el área de juego horizontalmente */
-    background-color: #2d3436;
-    overflow: hidden;
-}
-
-
 .line {
     width: 12px;
     height: 100px;
@@ -117,3 +107,17 @@
     left: calc(50% - 12px);
 }
 
+@media (max-width: 600px) {
+    .gameArea {
+        width: 90vw; /* Más ancho para dispositivos más pequeños */
+        height: calc(100vh - 120px); /* Ajusta la altura para los controles */
+    }
+    .controls {
+        width: 80vw; /* Más ancho para facilitar el acceso en dispositivos pequeños */
+        bottom: 10px; /* Menos espacio desde el fondo */
+    }
+    .controls button {
+        width: 15vw; /* Botones más grandes */
+        height: 15vw; /* Mantén la proporción */
+    }
+}
