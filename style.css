@@ -35,6 +35,10 @@
 }
 
 .controls button {
+    user-select: none; /* Impide la selección de texto */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer */
     flex: 1; /* Los botones ocupan todo el espacio disponible */
     min-width: 50px;
     height: 10vh; /* Dependiendo del espacio vertical disponible */
