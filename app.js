@@ -78,10 +78,10 @@ function triggerVibration(type) {
     if (navigator.vibrate) {
         if (type === 'collision') {
             // Vibración fuerte para colisiones
-            window.navigator.vibrate([200, 50, 200, 50, 200]);
+            window.navigator.vibrate([300]);
         } else if (type === 'limit') {
-            // Vibración más continua pero tenue para límites de la pista
-            window.navigator.vibrate([100, 30, 100, 30, 100, 30]);
+            // Vibración continua que va disminuyendo en intensidad para límites de la pista
+            window.navigator.vibrate([300, 50, 200, 50, 100]); // Disminuye gradualmente
         }
     } else {
         console.log('Vibration API not supported.');
