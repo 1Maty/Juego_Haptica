@@ -28,27 +28,22 @@
 }
 .controls {
     position: fixed;
-    bottom: 20px;
+    bottom: 5vh; /* Asegura un espacio visible debajo */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     justify-content: space-between;
-    width: 200px;
+    width: 80%; /* Hace que los botones se expandan con la pantalla */
     z-index: 10; /* Asegura que esté por encima de otros elementos */
 }
 
 
-.controls button {
-    width: 60px;
-    height: 60px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    font-size: 24px;
-    outline: none;
-}
 
+.controls button {
+    flex: 1; /* Los botones ocupan todo el espacio disponible */
+    min-width: 50px;
+    height: 10vh; /* Dependiendo del espacio vertical disponible */
+}
 .startScreen {
     width: 50vw;
     position: absolute;
@@ -104,14 +99,13 @@
 }
 
 .gameArea {
-    width: 400px;
-    height: calc(100vh - 100px); /* Reduce la altura para dar espacio a los controles */
-    margin: auto;
-    background-color: #2d3436;
+    width: 100%; /* O un porcentaje del viewport que se adapte mejor */
+    max-width: 400px; /* Ajusta según la máxima anchura deseada */
+    height: 80vh; /* Ajusta según la altura deseada, dejando espacio para controles */
     position: relative;
+    margin: 0 auto; /* Centra el área de juego horizontalmente */
+    background-color: #2d3436;
     overflow: hidden;
-    border-right: 7px dashed #c8d6e5;
-    border-left: 7px dashed #c8d6e5;
 }
 
 
