@@ -81,7 +81,7 @@ function triggerVibration(type) {
             window.navigator.vibrate([600]);
         } else if (type === 'limit') {
             // Vibración continua que va disminuyendo en intensidad para límites de la pista
-            window.navigator.vibrate([222, 40, 111, 30, 70]); // Disminuye gradualmente
+            window.navigator.vibrate([222, 30, 111, 20, 70]); // Disminuye gradualmente
         }
     } else {
         console.log('Vibration API not supported.');
@@ -213,7 +213,13 @@ function endGame() {
     player.start = false;
     startScreen.classList.remove("hide");
 
+    // Mostrar el puntaje final
+    startScreen.innerHTML = `Game Over! <br> Your final score is: ${player.score} <br> Click to Restart`;
+
     // Pause and reset the music when the game ends
     gameMusic.pause();
     gameMusic.currentTime = 0;
+
+    // Permitir que el jugador haga clic para reiniciar
+    startScreen.addEventListener('click', startGame);
 }
